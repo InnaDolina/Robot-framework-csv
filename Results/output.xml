@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.11.5 on win32)" generated="20231231 17:04:27.928" rpa="false" schemaversion="4">
+<suite id="s1" name="Cars" source="C:\Projects\Robot\data driven csv\tests\Cars.robot">
+<test id="s1-t1" name="Should see correct error messages with invalid logins" line="16">
+<kw name="Begin Web Test" library="Common" type="SETUP">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20231231 17:04:28.088" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20231231 17:04:28.087" endtime="20231231 17:04:29.697"/>
+</kw>
+<status status="PASS" starttime="20231231 17:04:28.087" endtime="20231231 17:04:29.697"/>
+</kw>
+<kw name="Get CSV Data" library="DataManager">
+<var>${InvalidLoginScenarios}</var>
+<arg>${INVALID_CREDENTIALS_PATH_CSV}</arg>
+<kw name="Read Csv File" library="Csv">
+<var>${Data}</var>
+<arg>${Filepath}</arg>
+<msg timestamp="20231231 17:04:29.699" level="INFO">${Data} = [['admin@robotframeworktutorial.com', 'TestPassword!', "You haven't signed up yet. Try a different email address or"], ['bryan@bryanlamb.com', 'TestPassword!', "Please double check your password. It s...</msg>
+<status status="PASS" starttime="20231231 17:04:29.698" endtime="20231231 17:04:29.699"/>
+</kw>
+<msg timestamp="20231231 17:04:29.699" level="INFO">${InvalidLoginScenarios} = [['admin@robotframeworktutorial.com', 'TestPassword!', "You haven't signed up yet. Try a different email address or"], ['bryan@bryanlamb.com', 'TestPassword!', "Please double check your password. It s...</msg>
+<status status="PASS" starttime="20231231 17:04:29.697" endtime="20231231 17:04:29.700"/>
+</kw>
+<kw name="Login with Many Invalid Credentials" library="CarsApp">
+<arg>${InvalidLoginScenarios}</arg>
+<for flavor="IN">
+<var>${LoginScenario}</var>
+<value>@{InvalidLoginScenarios}:</value>
+<iter>
+<var name="${LoginScenario}">[['admin@robotframeworktutorial.com', 'TestPassword!', "You haven't signed up yet. Try a different email address or"], ['bryan@bryanlamb.com', 'TestPassword!', "Please double check your password. It s...</var>
+<kw name="Navigate to Sign In Page" library="CarsApp">
+<kw name="Navigate To" library="SignIn">
+<kw name="Catenate" library="BuiltIn">
+<var>${SignInUrl}</var>
+<arg>SEPARATOR=/</arg>
+<arg>${BASE_URL.${ENVIRONMENT}}</arg>
+<arg>${LOGIN_URL}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20231231 17:04:29.705" level="FAIL">Resolving variable '${BASE_URL.prod}' failed: AttributeError: 'list' object has no attribute 'prod'</msg>
+<status status="FAIL" starttime="20231231 17:04:29.703" endtime="20231231 17:04:29.705"/>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${SignInUrl}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" starttime="20231231 17:04:29.705" endtime="20231231 17:04:29.705"/>
+</kw>
+<status status="FAIL" starttime="20231231 17:04:29.702" endtime="20231231 17:04:29.705"/>
+</kw>
+<status status="FAIL" starttime="20231231 17:04:29.702" endtime="20231231 17:04:29.706"/>
+</kw>
+<kw name="Attempt Login" library="CarsApp">
+<arg>${LoginScenario}</arg>
+<status status="NOT RUN" starttime="20231231 17:04:29.706" endtime="20231231 17:04:29.706"/>
+</kw>
+<kw name="Verify Login Page Error Message" library="CarsApp">
+<arg>${LoginScenario}</arg>
+<status status="NOT RUN" starttime="20231231 17:04:29.706" endtime="20231231 17:04:29.706"/>
+</kw>
+<status status="FAIL" starttime="20231231 17:04:29.702" endtime="20231231 17:04:29.706"/>
+</iter>
+<status status="FAIL" starttime="20231231 17:04:29.701" endtime="20231231 17:04:29.706"/>
+</for>
+<status status="FAIL" starttime="20231231 17:04:29.700" endtime="20231231 17:04:29.707"/>
+</kw>
+<kw name="End Web Test" library="Common" type="TEARDOWN">
+<kw name="Close All Browsers" library="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" starttime="20231231 17:04:29.708" endtime="20231231 17:04:35.906"/>
+</kw>
+<status status="PASS" starttime="20231231 17:04:29.708" endtime="20231231 17:04:35.906"/>
+</kw>
+<status status="FAIL" starttime="20231231 17:04:28.086" endtime="20231231 17:04:35.907">Resolving variable '${BASE_URL.prod}' failed: AttributeError: 'list' object has no attribute 'prod'</status>
+</test>
+<doc>Demonstrate a need for data-driven testing</doc>
+<status status="FAIL" starttime="20231231 17:04:27.930" endtime="20231231 17:04:35.912"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Cars">Cars</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
